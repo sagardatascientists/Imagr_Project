@@ -10,11 +10,12 @@ import keras
 
 # To stop potential randomness
 seed = 128
+# Neural Network for digit recognition
 
 train_dir = "/home/sagar/IMAGR/Quiz/20_March_final/Data/Train"
 test_dir = "/home/sagar/IMAGR/Quiz/20_March_final/Data/Test"
 modelPath = "/home/sagar/IMAGR/Quiz/20_March_final/Data/model.h5";
-modelJsonPath = "/home/sagar/IMAGR/Quiz/20_March_final/Data/modelJson.json"
+modelJsonPath1   = "/home/sagar/IMAGR/Quiz/20_March_final/Data/modelJson.json"
 
 # check for existence
 os.path.exists(train_dir)

@@ -87,7 +87,6 @@ train_x, val_x = train_x[:split_size], train_x[split_size:]
 train_y, val_y = trainLabel[:split_size], trainLabel[split_size:]
 
 
-
 # one hot encode outputs
 #y_train = np_utils.to_categorical(train_y)
 #y_test = np_utils.to_categorical(testLabel)
@@ -95,6 +94,7 @@ num_classes = trainLabel.shape[1]
 
 #kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=seed)
 #for train, test in kfold.split(X, Y):
+
 # Create the model
 # model = Sequential()
 # model.add(Convolution2D(30, 5, 5, border_mode='valid', input_shape=(1, 64, 32), activation='relu'))
@@ -141,6 +141,7 @@ model.add(Dense(num_classes, activation='softmax'))
 # model.add(Dense(512, activation='relu', W_constraint=maxnorm(3)))
 # model.add(Dropout(0.2))
 # model.add(Dense(num_classes, activation='softmax'))
+
 #  Compile model
 epochs = 1
 learningrate = 0.01
@@ -150,19 +151,17 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 print(model.summary())
 
 #  Fit the model
-model.fit(train_x, train_y, nb_epoch=epochs, batch_size=600,validation_data=(val_x, val_y))
+model.fit(train_x, train_y, nb_epoch=epochs, batch_size=400,validation_data=(val_x, val_y))
 # Final evaluation of the modely
 
 scores = model.evaluate(train_x, train_y, verbose=0)
 
 print("Model Prediction Accuracy For Train Data: %.2f%%" % (scores[1] * 100))
-print("Model Prediction Accuracy For Train Data: %.2f%%" % 100)
 
+scores1 = model.evaluate(test_x, testLabel, verbose=0)
 
-scores1 = model.evaluate(test_x[0], testLabel[0], verbose=0)
-
-print("Model Prediction Accuracy For Test Image 0_1.jpg: %.2f%%" % (scores1[1] * 100))
-#print("Baseline Error: %.2f%%" % (100-scores[1]*100))
+print("Model Prediction Accuracy For Test Data: %.2f%%" % (scores1[1] * 100))
+print("Baseline Error: %.2f%%" % (100-scores[1]*100))
 
 model.save(modelPath)
 # serialize model to JSON
@@ -175,9 +174,9 @@ prob=model.predict_proba(test_x)
 
 prob_s = np.around(prob, decimals=5)
 prob_s = prob_s[0]
-pred = model.predict(test_x)
 
-print "Confidence Level", prob_s
+print "Confidence Level for digit", prob_s
+
 #probabilities = model.predict(X_test)
 # predictions = [float(round(x)) for x in probabilities]
 # accuracy = numpy.mean(predictions == testLabel)
