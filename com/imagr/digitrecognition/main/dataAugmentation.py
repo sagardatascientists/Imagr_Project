@@ -1,5 +1,6 @@
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 
+#Input and output Data
 input_img="/home/sagar/IMAGR/Quiz/root/dat/0_0.jpg"
 output_img ="/home/sagar/IMAGR/Quiz/root/dat/augmentation/"
 
@@ -12,7 +13,7 @@ datagen = ImageDataGenerator(
     horizontal_flip=True,
     fill_mode='nearest')
 
-img = load_img('')  # this is a PIL image
+img = load_img(input_img)  # this is a PIL image
 x = img_to_array(img)  # this is a Numpy array with shape (3, 150, 150)
 x = x.reshape((1,) + x.shape)  # this is a Numpy array with shape (1, 3, 150, 150)
 
