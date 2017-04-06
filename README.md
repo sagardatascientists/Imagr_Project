@@ -1,4 +1,4 @@
-# Imagr_Project
+# Deep Learning Project (Image Processing)
 
 This Project contains : 
   
